@@ -40,7 +40,7 @@ This backend project is scaffolded with:
    Copy the `.env.sample` file to create a `.env` in the root directory:
 
    ```bash
-   cp .env.sample .env
+   cp .env .env
     ```
 
    Modify the .env file with appropriate database and other configurations.
