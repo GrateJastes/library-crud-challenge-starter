@@ -6,17 +6,21 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { CreateBookDto } from './dto/create-book.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
+import { CreateBookDto, createBookSchema } from './dto/create-book.dto';
+import { UpdateBookDto, updateBookSchema } from './dto/update-book.dto';
+import { ZodValidationPipe } from '../core/pipes/zod-validation-pipe';
 
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   @Post()
-  create(@Body() createBookDto: CreateBookDto) {
+  create(
+    @Body(new ZodValidationPipe(createBookSchema)) createBookDto: CreateBookDto,
+  ) {
     return this.booksService.create(createBookDto);
   }
 
@@ -26,17 +30,20 @@ export class BooksController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: string) {
     return this.booksService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
+  update(
+    @Param('id', ParseIntPipe) id: string,
+    @Body(new ZodValidationPipe(updateBookSchema)) updateBookDto: UpdateBookDto,
+  ) {
     return this.booksService.update(+id, updateBookDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: string) {
     return this.booksService.remove(+id);
   }
 }

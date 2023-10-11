@@ -1,4 +1,4 @@
-import { IDatabaseConfig } from './interfaces/dbConfig.interface';
+import { IDatabaseConfig } from './interfaces/db-config.interface';
 
 export const databaseConfig: IDatabaseConfig = {
   development: {

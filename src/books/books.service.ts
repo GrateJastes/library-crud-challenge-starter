@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { Book } from './entities/book.entity';
 
 @Injectable()
 export class BooksService {
   create(createBookDto: CreateBookDto) {
-    return 'This action adds a new book';
+    const newBook = new Book(createBookDto);
+    return newBook.save();
   }
 
   findAll() {
-    return `This action returns all books`;
+    return Book.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} book`;
+    return Book.findByPk(id);
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+    return Book.update(updateBookDto, {
+      where: {
+        id: id,
+      },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} book`;
+    return Book.destroy({ where: { id: id } });
   }
 }
