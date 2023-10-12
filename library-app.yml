@@ -13,7 +13,7 @@ spec:
         app: library-app
     spec:
       containers:
-        - name: nginx
+        - name: library-backend
           image: "europe-central2-docker.pkg.dev/pass-holder-389321/library-repo/library-app:v1"
           ports:
             - containerPort: 3000
