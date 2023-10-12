@@ -5,8 +5,7 @@ metadata:
 spec:
   containers:
     - name: backend-container
-      imagePullPolicy: Never
-      image: production
+      image: "europe-central2-docker.pkg.dev/pass-holder-389321/library-repo/library-app:v1"
       envFrom:
         - secretRef:
             name: database-secret
