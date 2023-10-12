@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: library-app
+  template:
+    metadata:
+      labels:
+        app: library-app
+    spec:
+      containers:
+        - name: nginx
+          image: "europe-central2-docker.pkg.dev/pass-holder-389321/library-repo/library-app:v1"
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: database-secret
+            - configMapRef:
+                name: app-config
