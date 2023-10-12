@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: library-pod
+spec:
+  containers:
+    - name: backend-container
+      imagePullPolicy: Never
+      image: production
+      envFrom:
+        - secretRef:
+            name: database-secret
+        - configMapRef:
+            name: app-config

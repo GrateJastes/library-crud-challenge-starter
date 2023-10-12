@@ -1,0 +1,14 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: library-crud-challenge-starter
+build:
+  artifacts:
+  - image: production
+    context: .
+    docker: {}
+manifests:
+  rawYaml:
+  - app.configmap.yml
+  - database.secret.yml
+  - library-pod.yml
